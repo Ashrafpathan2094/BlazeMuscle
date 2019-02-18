@@ -6,19 +6,19 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-
+const routes = require('./routes/routes');
 const app = express();
 
-const port = 3000;
+const port = 4000;
 
-// mongoose.connect("mongodb://127.0.0.1:27017/foodDB",{ useNewUrlParser:true },function(err){
-// 	if(err){
-// 		console.log(err);
-// 	}
-// 	else{
-// 		console.log('connected');
-// 	}
-// });
+mongoose.connect("mongodb://127.0.0.1:27017/gymDB",{ useNewUrlParser:true },function(err){
+	if(err){
+		console.log(err);
+	}
+	else{
+		console.log('connected');
+	}
+});
 
 app.use(cookieParser());
 app.use(session({
@@ -31,11 +31,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash());
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-passport.use(new LocalStrategy(User.authenticate()));
-app.use(passport.initialize());
-app.use(passport.session());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
+// passport.use(new LocalStrategy(User.authenticate()));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use(function(req, res, next){
     res.locals.alert = req.flash('alert');
