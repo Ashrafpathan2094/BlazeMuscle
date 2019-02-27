@@ -9,6 +9,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const routes = require('./routes/routes');
 const app = express();
 
+const User = require('./models/user');
+
 const port = 4000;
 
 mongoose.connect("mongodb://127.0.0.1:27017/gymDB",{ useNewUrlParser:true },function(err){
@@ -31,11 +33,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash());
 
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-// passport.use(new LocalStrategy(User.authenticate()));
-// app.use(passport.initialize());
-// app.use(passport.session());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+passport.use(new LocalStrategy(User.authenticate()));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(function(req, res, next){
     res.locals.alert = req.flash('alert');
