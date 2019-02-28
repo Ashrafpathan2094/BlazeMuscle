@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 
 const User = require('../models/user');
+const Exercise = require('../models/exercise');
 
 const router  = express.Router();
 
@@ -46,7 +47,15 @@ router.post('/signup',function(req,res){
 });
 
 router.get('/workout',function(req,res){
-	res.render('workout');
+
+	Exercise.find({},function(err,allExercise){
+		if(err){
+			console.log(err);
+		} else {
+			res.render('workout',{Exercises : allExercise});
+		}
+	});
+
 });
 
 // router.get('/signup',function(req,res){

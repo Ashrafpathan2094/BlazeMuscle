@@ -10,8 +10,11 @@ const routes = require('./routes/routes');
 const app = express();
 
 const User = require('./models/user');
+const Exercise = require('./models/exercise');
 
-const port = 4000;
+const seedDB = require('./seed');
+
+const port = 3000;
 
 mongoose.connect("mongodb://127.0.0.1:27017/gymDB",{ useNewUrlParser:true },function(err){
 	if(err){
@@ -19,6 +22,11 @@ mongoose.connect("mongodb://127.0.0.1:27017/gymDB",{ useNewUrlParser:true },func
 	}
 	else{
 		console.log('connected');
+		if(Exercise.find({},function(err,items){
+			if(items.length === 0){
+				seedDB();
+			}
+		}));
 	}
 });
 
