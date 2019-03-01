@@ -70,7 +70,11 @@ margin-top: -85px;
     /* width: 30%; */
     width: 10%;
     /* height: 300px; */
-    height: 550px;
+    /* height: 550px; */
+    margin-top : 20px;
+    margin-bottom : 20px;
+    height: 90%;
+
   }
   
   /* Style the buttons inside the tab */
@@ -104,10 +108,12 @@ margin-top: -85px;
     /* padding: 0px 12px; */
     border: 1px solid #ccc;
     width: 90%;
-    border-left: none;
+    /* border-left: none; */
     /* height: 300px; */
-    height: 550px;
-
+    /* height: 550px; */
+    margin-top : 20px;
+    height: 90%;
+    margin-bottom : 20px;
   }
 
   /* Log */
@@ -117,10 +123,10 @@ margin-top: -85px;
     height: 300px;
   } */
 
-  div.row.items {
+  /* div.row.items {
     width: 100%;
     margin : 0;
-  }
+  } */
 
   div.row.item {
     width: 100%;
@@ -141,4 +147,8 @@ div.thumbnail {
 .thumbnail > img {
   width: 100%;
   height: 200px;
+}
+
+.add-to-log {
+  margin : 0 auto;
 }

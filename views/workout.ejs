@@ -7,7 +7,7 @@
         <button class="tablinks" onclick="openCity(event, 'Chest')" id="defaultOpen">Chest</button>
         <button class="tablinks" onclick="openCity(event, 'Back')">Back</button>
         <button class="tablinks" onclick="openCity(event, 'Legs')">Legs</button>
-        <button class="tablinks" onclick="openCity(event, 'Shoulder')">Shoulders</button>
+        <button class="tablinks" onclick="openCity(event, 'Shoulders')">Shoulders</button>
         <button class="tablinks" onclick="openCity(event, 'Triceps')">Triceps</button>
         <button class="tablinks" onclick="openCity(event, 'Biceps')">Biceps</button>
         <button class="tablinks" onclick="openCity(event, 'Abs')">Abs</button>
@@ -15,45 +15,177 @@
 
     <div id="Chest" class="tabcontent">
 
-        <div class = "row items">
+        <div class = "row item">
 
-            <% for(var i=0;i<3;i++){%>
+            <% Exercises.forEach(function(current){ %>
+                <% if(current.Muscle === 'Chest'){ %>
+
                 <div class = "col-md-4">
                     <div class="row item">
                         <div class="thumbnail">
-                            <img src="<%= Exercises[i].ImagePath %>" alt="<%= Exercises[i].Name %>" class="img-thumbnail img-responsive">
+                            <img src="<%= current.ImagePath %>" alt="<%= current.Name %>" class="img-thumbnail img-responsive">
                             <div class="caption">
-                                <p class="Title"><strong> <%= Exercises[i].Name %> </strong></p>
+                                <p class="Title"><strong> <%= current.Name %> </strong></p>
                             </div>
+                        </div>
+                        <div class='add-to-log'>
+                            <button class='btn btn-primary'>Add to Log</button>
                         </div>
                     </div>
                 </div>
-            <% } %>
+                
+                <% }%>
+                <% });%>
+
         </div>
 
     </div>
 
     <div id="Back" class="tabcontent">
 
+    <div class="row item">
+
+
+    <% Exercises.forEach(function(current){ %>
+ 
+    <%if(current.Muscle === 'Back'){%>
+        <div class = "col-md-4">
+            <div class="row item">
+                <div class="thumbnail">
+                    <img src="<%= current.ImagePath %>" alt="<%= current.Name %>" class="img-thumbnail img-responsive">
+                    <div class="caption">
+                        <p class="Title"><strong> <%= current.Name %> </strong></p>
+                    </div>
+                </div>
+                <div class='add-to-log'>
+                            <button class='btn btn-primary'>Add to Log</button>
+                        </div>
+            </div>
+        </div>
+        <% } %>
+    <% });%>
+    </div>
+
     </div>
 
     <div id="Legs" class="tabcontent">
+    <div class="row item">
+    <% Exercises.forEach(function(current){ %>
+    <%if(current.Muscle === 'Legs'){%>
 
+    <div class = "col-md-4">
+        <div class="row item">
+            <div class="thumbnail">
+                <img src="<%= current.ImagePath %>" alt="<%= current.Name %>" class="img-thumbnail img-responsive">
+                <div class="caption">
+                    <p class="Title"><strong> <%= current.Name %> </strong></p>
+                </div>
+            </div>
+            <div class='add-to-log'>
+                            <button class='btn btn-primary'>Add to Log</button>
+                        </div>
+        </div>
+    </div>
+    <%}%>
+<% });%>
+    </div>
     </div>
 
     <div id="Shoulders" class="tabcontent">
 
+    <div class="row item">
+    <% Exercises.forEach(function(current){ %>
+    <%if(current.Muscle === 'Shoulder'){%>
+    
+    <div class = "col-md-4">
+        <div class="row item">
+            <div class="thumbnail">
+                <img src="<%= current.ImagePath %>" alt="<%= current.Name %>" class="img-thumbnail img-responsive">
+                <div class="caption">
+                    <p class="Title"><strong> <%= current.Name %> </strong></p>
+                </div>
+            </div>
+            <div class='add-to-log'>
+                            <button class='btn btn-primary'>Add to Log</button>
+                        </div>
+        </div>
+    </div>
+    <%}%>
+    <% });%>
+    </div>
+
     </div>
 
     <div id="Triceps" class="tabcontent">
+        
+    <div class="row item">
+    <% Exercises.forEach(function(current){ %>
+    <%if(current.Muscle === 'Triceps'){%>    
+    <div class = "col-md-4">
+        <div class="row item">
+            <div class="thumbnail">
+                <img src="<%= current.ImagePath %>" alt="<%= current.Name %>" class="img-thumbnail img-responsive">
+                <div class="caption">
+                    <p class="Title"><strong> <%= current.Name %> </strong></p>
+                </div>
+            </div>
+            <div class='add-to-log'>
+                            <button class='btn btn-primary'>Add to Log</button>
+                        </div>
+        </div>
+    </div>
+    <%}%>
+<% });%>
+    </div>
 
     </div>
 
     <div id="Biceps" class="tabcontent">
 
+
+    <div class="row item">
+    <% Exercises.forEach(function(current){ %>
+    <%if(current.Muscle === 'Biceps'){%>    
+    <div class = "col-md-4">
+        <div class="row item">
+            <div class="thumbnail">
+                <img src="<%= current.ImagePath %>" alt="<%= current.Name %>" class="img-thumbnail img-responsive">
+                <div class="caption">
+                    <p class="Title"><strong> <%= current.Name %> </strong></p>
+                </div>
+            </div>
+            <div class='add-to-log'>
+                <button class='btn btn-primary'>Add to Log</button>
+            </div>
+        </div>
+    </div>
+    <%}%>
+<% });%>
+    </div>
+
     </div>
 
     <div id="Abs" class="tabcontent">
+
+    <div class="row item">
+    <% Exercises.forEach(function(current){ %>
+    <%if(current.Muscle === 'Abs'){%>    
+    <div class = "col-md-4">
+        <div class="row item">
+            <div class="thumbnail">
+                <img src="<%= current.ImagePath %>" alt="<%= current.Name %>" class="img-thumbnail img-responsive">
+                <div class="caption">
+                    <p class="Title"><strong> <%= current.Name %> </strong></p>
+                </div>
+            </div>
+            <div class='add-to-log'>
+                            <button class='btn btn-primary'>Add to Log</button>
+                        </div>
+        </div>
+    </div>
+    <%}%>
+<% });%>
+    </div>
 
     </div>
 

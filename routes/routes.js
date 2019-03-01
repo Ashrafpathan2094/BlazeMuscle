@@ -46,7 +46,7 @@ router.post('/signup',function(req,res){
 	});
 });
 
-router.get('/workout',function(req,res){
+router.get('/workout',middleware.isLoggedIn,function(req,res){
 
 	Exercise.find({},function(err,allExercise){
 		if(err){
@@ -96,10 +96,10 @@ router.get('/workout',function(req,res){
 // 	failureFlash : true
 // }));	
 
-// router.get('/signout', function(req, res){
-// 	req.logout();
-// 	res.redirect('/menu');
-// });
+router.get('/signout', function(req, res){
+	req.logout();
+	res.redirect('/signin');
+});
 
 router.get('*',function(req,res){
 	res.send("page not found");

@@ -11,10 +11,6 @@ const exerciseSchema = mongoose.Schema({
         type : String,
         required : true,
     },
-    Category : {
-        type : String,
-        required : true
-    },
     Muscle : {
         type : String,
         required : true
