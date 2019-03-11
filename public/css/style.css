@@ -152,3 +152,35 @@ div.thumbnail {
 .add-to-log {
   margin : 0 auto;
 }
+
+/* ------------------------------------------- */
+                /* Log */
+/* ------------------------------------------- */
+
+.thumbnail > img.exercise-image {
+  height: 140px;
+}
+
+p>input.reps-box,
+p>input.set-box{
+  width: 20%;
+}
+
+.container > .row.log-item p {
+  font-size: 85%;
+  display: inline;
+}
+
+.fa.fa-trash {
+  color: #212121;
+}
+
+.fa.fa-trash:hover{
+  color: #ff0000;
+}
+
+button.btn-lg.btn.save-button,
+button.btn-lg.btn.empty-log-button {
+  float: right;
+  margin: 0 10px;
+}

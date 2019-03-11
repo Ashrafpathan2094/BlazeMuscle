@@ -6,7 +6,7 @@ function validateSignUp(){
             const password = $('#password');
             const confirmPassword = $('#password_confirmation');
     
-            if(phoneNumber.val().length < 10 ){
+            if(phoneNumber.val().length !== 10 ){
                 alert("Enter Phone Number with 10 digits");
                 event.preventDefault();
             }

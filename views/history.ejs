@@ -1,0 +1,32 @@
+<% include partials/header%>
+
+<% include partials/navigation%>
+
+<div class='container'>
+    
+    <% include partials/_messages%>
+
+    <div class = 'table-responsive'>
+        <table class='table table-striped table-condensed'>
+
+        <tr>
+            <th> Log ID </th>
+            <th> Date </th>
+        </tr>
+
+        <% logs.forEach(function(current){ %>
+
+            <tr>
+                <td> <a href="/history/<%=current.log_id%>"> <%= current.log_id %> </a> </td>
+                <td> <%= moment(current.createdAt).format('Do MMMM YYYY hh:mm:ss a');%> </td>
+            </tr>
+
+        <% });%>
+        
+        </table>
+        </div>
+        
+        </div>
+        
+<% include partials/footer%>
+        

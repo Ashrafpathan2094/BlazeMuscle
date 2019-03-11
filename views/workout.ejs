@@ -29,7 +29,24 @@
                             </div>
                         </div>
                         <div class='add-to-log'>
-                            <button class='btn btn-primary'>Add to Log</button>
+                            <button class='btn btn-primary' onclick='toggleLog(event,"<%= current.Name%>")'>
+                            <% if(typeof log!=='undefined' && log.length > 0){ %>
+                            <% var flag = false;%>
+                            <% for(var i=0;i<log.length;i++){%>
+                                <% if(log[i].Name === current.Name ){%>
+                                    <% flag = true; %>
+                                    <% break; %>
+                                <% } %>
+                            <% } %>
+                                <% if(flag === true ){ %>
+                                    Remove from Log
+                                <% } else {%>
+                                    Add to Log
+                                <% } %>
+                        <% } else { %>
+                            Add to Log
+                        <% } %>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -58,7 +75,24 @@
                     </div>
                 </div>
                 <div class='add-to-log'>
-                            <button class='btn btn-primary'>Add to Log</button>
+                            <button class='btn btn-primary' onclick='toggleLog(event,"<%= current.Name%>")'>
+                            <% if(typeof log!=='undefined' && log.length > 0){ %>
+                            <% var flag = false;%>
+                            <% for(var i=0;i<log.length;i++){%>
+                                <% if(log[i].Name === current.Name ){%>
+                                    <% flag = true; %>
+                                    <% break; %>
+                                <% } %>
+                            <% } %>
+                                <% if(flag === true ){ %>
+                                    Remove from Log
+                                <% } else {%>
+                                    Add to Log
+                                <% } %>
+                        <% } else { %>
+                            Add to Log
+                        <% } %>
+                            </button>
                         </div>
             </div>
         </div>
@@ -82,7 +116,24 @@
                 </div>
             </div>
             <div class='add-to-log'>
-                            <button class='btn btn-primary'>Add to Log</button>
+                            <button class='btn btn-primary' onclick='toggleLog(event,"<%= current.Name%>")'>
+                            <% if(typeof log!=='undefined' && log.length > 0){ %>
+                            <% var flag = false;%>
+                            <% for(var i=0;i<log.length;i++){%>
+                                <% if(log[i].Name === current.Name ){%>
+                                    <% flag = true; %>
+                                    <% break; %>
+                                <% } %>
+                            <% } %>
+                                <% if(flag === true ){ %>
+                                    Remove from Log
+                                <% } else {%>
+                                    Add to Log
+                                <% } %>
+                        <% } else { %>
+                            Add to Log
+                        <% } %>
+                            </button>
                         </div>
         </div>
     </div>
@@ -106,7 +157,24 @@
                 </div>
             </div>
             <div class='add-to-log'>
-                            <button class='btn btn-primary'>Add to Log</button>
+                            <button class='btn btn-primary' onclick='toggleLog(event,"<%= current.Name%>")'>
+                            <% if(typeof log!=='undefined' && log.length > 0){ %>
+                            <% var flag = false;%>
+                            <% for(var i=0;i<log.length;i++){%>
+                                <% if(log[i].Name === current.Name ){%>
+                                    <% flag = true; %>
+                                    <% break; %>
+                                <% } %>
+                            <% } %>
+                                <% if(flag === true ){ %>
+                                    Remove from Log
+                                <% } else {%>
+                                    Add to Log
+                                <% } %>
+                        <% } else { %>
+                            Add to Log
+                        <% } %>
+                            </button>
                         </div>
         </div>
     </div>
@@ -130,7 +198,24 @@
                 </div>
             </div>
             <div class='add-to-log'>
-                            <button class='btn btn-primary'>Add to Log</button>
+                            <button class='btn btn-primary' onclick='toggleLog(event,"<%= current.Name%>")'>
+                            <% if(typeof log!=='undefined' && log.length > 0){ %>
+                            <% var flag = false;%>
+                            <% for(var i=0;i<log.length;i++){%>
+                                <% if(log[i].Name === current.Name ){%>
+                                    <% flag = true; %>
+                                    <% break; %>
+                                <% } %>
+                            <% } %>
+                                <% if(flag === true ){ %>
+                                    Remove from Log
+                                <% } else {%>
+                                    Add to Log
+                                <% } %>
+                        <% } else { %>
+                            Add to Log
+                        <% } %>
+                            </button>
                         </div>
         </div>
     </div>
@@ -155,7 +240,24 @@
                 </div>
             </div>
             <div class='add-to-log'>
-                <button class='btn btn-primary'>Add to Log</button>
+                <button class='btn btn-primary' onclick='toggleLog(event,"<%= current.Name%>")'>
+                <% if(typeof log!=='undefined' && log.length > 0){ %>
+                <% var flag = false;%>
+                <% for(var i=0;i<log.length;i++){%>
+                    <% if(log[i].Name === current.Name ){%>
+                        <% flag = true; %>
+                        <% break; %>
+                    <% } %>
+                <% } %>
+                    <% if(flag === true ){ %>
+                        Remove from Log
+                    <% } else {%>
+                        Add to Log
+                    <% } %>
+            <% } else { %>
+                Add to Log
+            <% } %>
+                </button>
             </div>
         </div>
     </div>
@@ -179,8 +281,27 @@
                 </div>
             </div>
             <div class='add-to-log'>
-                            <button class='btn btn-primary'>Add to Log</button>
-                        </div>
+                <button class='btn btn-primary' onclick='toggleLog(event,"<%= current.Name%>")'>
+
+                    <% if(typeof log!=='undefined' && log.length > 0){ %>
+                                <% var flag = false;%>
+                                <% for(var i=0;i<log.length;i++){%>
+                                    <% if(log[i].Name === current.Name ){%>
+                                        <% flag = true; %>
+                                        <% break; %>
+                                    <% } %>
+                                <% } %>
+                                    <% if(flag === true ){ %>
+                                        Remove from Log
+                                    <% } else {%>
+                                        Add to Log
+                                    <% } %>
+                            <% } else { %>
+                                Add to Log
+                            <% } %>
+
+                </button>
+            </div>
         </div>
     </div>
     <%}%>
