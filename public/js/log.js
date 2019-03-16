@@ -22,10 +22,11 @@ function clearLog(){
 function removeItem(event,name){
 
     var removeRequest = new XMLHttpRequest();
+    var mouseEventTarget = $(event.target);
     
     removeRequest.onreadystatechange = function(){
         if(this.status == 200 && this.readyState == 4){
-            $(event.target).closest("div.row.log-item").html("");            
+            mouseEventTarget.closest("tr.row.log-item").html("");            
         }
     }
 
@@ -37,12 +38,12 @@ function removeItem(event,name){
 
 function save() {
     event.preventDefault();
-    if($('#cart-list').html() === '<h3>Cart is Empty! &nbsp; Select items from menu to add.</h3>'){
+    if($('#log-list').html() === '<h3>Cart is Empty! &nbsp; Select items from menu to add.</h3>'){
         alert('Add menu items to cart.');
     } else {
         var logs = {};
         logs.items = [];
-        $('div.row.log-item').each(function(element){
+        $('div.row.log-list').each(function(element){
             var name = $(this).find('h3.exercise-name').text();
             var set = $(this).find('input.set-box').val();
             var reps = $(this).find('input.reps-box').val();
