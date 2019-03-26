@@ -1,107 +1,97 @@
 <% include partials/header%>
-
 <% include partials/navigation%>
 
-<hr>
+    <hr>
 
-<div class="container">
-<div id="log-list">
+    <div class="container">
+        <div id="log-list">
 
-<% if(typeof log !== 'undefined' && log.length > 0){ %>
-
-    <div class="row log-list">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Exercise</th>
-                        <th>Weight</th>
-                        <th class="text-center">Sets</th>
-                        <th class="text-center">Reps</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-
-    <% for(var i=0;i<log.length;i++) {%>
-    
-    <tr class="row log-item">
-        <td class="col-sm-8 col-md-6">
-            <div class="media">
-            <!-- Product Thumbnail -->
-                <a class="thumbnail pull-left"> <img class="media-object" src="<%=log[i].ImagePath%>" style="width: 72px; height: 72px;"> </a>
-                <!--  -->
-
-
-                <div class="media-body">
-                    <!-- Exercise name and muscle targeted -->
-                    <h3 class="media-heading exercise-name"><%=log[i].Name%></h4>
-                    <h4 class="media-heading"><%=log[i].Muscle%></h5>
-                    <!-- <span>Status: </span><span class="text-success"><strong>In Stock</strong></span> -->
-                </div>
-            </div>
-        </td>
-        <td class="col-sm-1 col-md-1" style="text-align: center">
-            <!-- Weight Input -->
-            <div class="reps-group">
-            <button type="button" class="btn btn-danger" id="decrement" onclick="decrement(event)">
-            <i class="fa fa-minus" aria-hidden="true"></i>
-            </button>
-            <input type="number" id="weight" name="weight" class="weight-box" value="1" oninput="validateQuantity(event)">           
-            <button type="button" class="btn btn-success" id="increment" onclick="increment(event)">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            </button>
-            </div>
-        </td>
-        <!-- Sets Input -->
-        <td>
-            <div class="set-group">
-            <button type="button" class="btn btn-danger" id="decrement" onclick="decrement(event)">
-            <i class="fa fa-minus" aria-hidden="true"></i>
-            </button>
-            <input type="number" id="set" name="set" class="set-box" value="1" oninput="validateQuantity(event)">
-            <button type="button" class="btn btn-success" id="increment" onclick="increment(event)">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            </button>
-            </div>
-        </td>
-        
-        <!-- Reps Input -->
-        <td>
-            <div class="reps-group">
-            <button type="button" class="btn btn-danger" id="decrement" onclick="decrement(event)">
-            <i class="fa fa-minus" aria-hidden="true"></i>
-            </button>
-            <input type="number" id="reps" name="reps" class="reps-box" value="1" oninput="validateQuantity(event)">
-            <button type="button" class="btn btn-success" id="increment" onclick="increment(event)">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            </button>
-            </div>
-        </td>
-        
-        <td class="col-sm-1 col-md-1">
-            <i class="fa fa-trash" onclick ='removeItem(event,"<%= log[i].Name %>")'></i>
-        </td>
-        </tr>
-        <% } %>
+        <% if(typeof log !== 'undefined' && log.length > 0){ %>
+            <table class="table table-condensed table-striped">
+            <thead>
+                
+                <th class="col-xs-5"> Food Item</th>
+                <th class="col-xs-2"> Weight </th>
+                <th class="col-xs-2"> Sets </th>
+                <th class="col-xs-2">Reps</th>
+                <th class="col-xs-1">  </th>
+            </thead>
+            <tbody>
+            <% log.forEach(function(current){ %>
+                <tr class="item">
+                    <td>
+                        <img src="<%=current.ImagePath%>" class="food-image" alt="<%=current.Name%>" style="width:72px;height=72px;">
+                        <h4 class='food-name'> <%=current.Name%> </h4>
+                    </td>
+                        
+                    <td>
+                        <div class="quantity-group input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-danger decrement" id="decrement" onclick="decrement()">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        <input type="text" id="quantity" name="quantity" class="quantity-box form-control input-number" value="1" oninput="validateQuantity()">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-success increment" id="increment" onclick="increment()">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </td>
+                    
+                    <td>
+                        <div class="quantity-group input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-danger decrement" id="decrement" onclick="decrement()">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        <input type="text" id="quantity" name="quantity" class="quantity-box form-control input-number" value="1" oninput="validateQuantity()">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-success increment" id="increment" onclick="increment()">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="quantity-group input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-danger decrement" id="decrement" onclick="decrement()">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        <input type="text" id="quantity" name="quantity" class="quantity-box form-control input-number" value="1" oninput="validateQuantity()">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-success increment" id="increment" onclick="increment()">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <i class="fa fa-trash" onclick ='removeItem("<%=current.Name%>")'></i>
+                    </td>
+                </tr>
+            
+                <% }) %>
             </tbody>
             </table>
-        <div>
-            <hr>
-            <div class="row">
-                <form>
-                    <button class="btn btn-success btn-lg save-button" onclick='save(event)'>Save Workout</button>
-                    <button class="btn btn-default btn-lg empty-log-button" id="empty-log">Empty Log</button>
-                </form>
-            </div>
-        </div>
-        <% } else { %>
-        <h3> Log is Empty! &nbsp; Select items from exercises to add. </h3>
-        <% } %>   
+            <p> Grand Total <span id="grand-total"></span> </p>
+                <% } else { %>
+                <h3> Cart is Empty! &nbsp; Select items from menu to add. </h3>
+                <% } %>   
+
         </div> 
-        <br>
-        </div>
+                <br>
 
-<script src='/js/log.js'></script>
-
+                <div class="row">
+                    <form>
+                    <button class="btn btn-success btn-lg check-out-button" onclick='checkout()'>Checkout</button>
+                    <button class="btn btn-default btn-lg empty-cart-button" id="empty-cart" onclick = 'clearCart()'>Empty Cart</button>
+                    </form>
+                </div>
+    </div>
+              
 <% include partials/footer%>
