@@ -6,29 +6,39 @@
 
 <div class="container">
 <div id="log-list">
+
+    <table class="table table-condensed table-striped">
+        <thead>
+            
+            <th class="col-xs-9"> Exercise</th>
+            <th class="col-xs-1"> Weight </th>
+            <th class="col-xs-1"> Set </th>
+            <th class="col-xs-1"> Rep </th>
+
+        </thead>
+        <tbody>
+
         <% logs.forEach(function(log){ %>
 
-            <div class="row log-item">
-            
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <img src="<%= log.exercise.ImagePath %>" class="exercise-image" alt="<%= log.exercise.Name %>">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <h3 class='exercise-name'> <%= log.exercise.Name %> </h3>
-                </div>
-                <div class="col-md-3">
-                    <br>
-                    <br>
-                    <p>
-                        Sets : <%=log.sets%>
-                        Reps : <%=log.reps%>
-                    </p>
-                    <hr>
-                </div>
 
-            </div>
+        <tr class="item">
+            <td>
+                <img src="<%=log.exercise.ImagePath%>" class="exercise-image" alt="<%=log.Name%>" style="width:72px;height : 72px;">
+                <h4 class='exercise-name'> <%=log.exercise.Name%> </h4>
+            </td>
+                
+            <td>
+                <%=log.weight%>
+            </td>
+            
+            <td>
+                <%=log.sets%>
+            </td>
+            <td>
+                <%=log.reps%>
+            </td>
+        </tr>
+
         <% }); %>
 
     </div>

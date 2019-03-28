@@ -15,6 +15,10 @@ const itemSchema = mongoose.Schema({
     reps : {
         type : String,
         required : true
+    },
+    weight : {
+        type : String,
+        required : true
     }
 },{_id : false});
 

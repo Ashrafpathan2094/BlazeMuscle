@@ -20,24 +20,12 @@
             <% log.forEach(function(current){ %>
                 <tr class="item">
                     <td>
-                        <img src="<%=current.ImagePath%>" class="food-image" alt="<%=current.Name%>" style="width:72px;height=72px;">
-                        <h4 class='food-name'> <%=current.Name%> </h4>
+                        <img src="<%=current.ImagePath%>" class="exercise-image" alt="<%=current.Name%>" style="width:72px;height : 72px;">
+                        <h4 class='exercise-name'> <%=current.Name%> </h4>
                     </td>
                         
                     <td>
-                        <div class="quantity-group input-group">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-danger decrement" id="decrement" onclick="decrement()">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
-                            </span>
-                        <input type="text" id="quantity" name="quantity" class="quantity-box form-control input-number" value="1" oninput="validateQuantity()">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-success increment" id="increment" onclick="increment()">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </span>
-                        </div>
+                        <input type="text" id="weight" name="weight" class="weight-box form-control input-number" value="1">
                     </td>
                     
                     <td>
@@ -47,7 +35,7 @@
                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                 </button>
                             </span>
-                        <input type="text" id="quantity" name="quantity" class="quantity-box form-control input-number" value="1" oninput="validateQuantity()">
+                        <input type="text" id="set" name="set" class="set-box form-control input-number" value="1" oninput="validateQuantity()">
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-success increment" id="increment" onclick="increment()">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
@@ -62,7 +50,7 @@
                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                 </button>
                             </span>
-                        <input type="text" id="quantity" name="quantity" class="quantity-box form-control input-number" value="1" oninput="validateQuantity()">
+                        <input type="text" id="rep" name="rep" class="rep-box form-control input-number" value="1" oninput="validateQuantity()">
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-success increment" id="increment" onclick="increment()">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
@@ -78,9 +66,8 @@
                 <% }) %>
             </tbody>
             </table>
-            <p> Grand Total <span id="grand-total"></span> </p>
                 <% } else { %>
-                <h3> Cart is Empty! &nbsp; Select items from menu to add. </h3>
+                <h3> Log is Empty! &nbsp; Select items from Workout to add. </h3>
                 <% } %>   
 
         </div> 
@@ -88,8 +75,8 @@
 
                 <div class="row">
                     <form>
-                    <button class="btn btn-success btn-lg check-out-button" onclick='checkout()'>Checkout</button>
-                    <button class="btn btn-default btn-lg empty-cart-button" id="empty-cart" onclick = 'clearCart()'>Empty Cart</button>
+                    <button class="btn btn-success btn-lg check-out-button" onclick='save()'>Save Workout</button>
+                    <button class="btn btn-default btn-lg empty-cart-button" id="empty-log" onclick = 'clearLog()'>Empty Log</button>
                     </form>
                 </div>
     </div>

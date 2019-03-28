@@ -172,7 +172,6 @@ router.post('/log',middleware.isLoggedIn,function(req,res){
 
 });
 
-
 router.post('/history',middleware.isLoggedIn,function(req,res){
 	var logItems =JSON.parse(req.query.items);
 	// console.log(items);
@@ -200,7 +199,7 @@ router.post('/history',middleware.isLoggedIn,function(req,res){
 					if(err){
 						reject(err);
 					}
-					resolve([item,current.set,current.reps]);
+					resolve([item,current.set,current.reps,current.weight]);
 				});
 			});
 		});
@@ -216,6 +215,7 @@ router.post('/history',middleware.isLoggedIn,function(req,res){
 				item.exercise_id = current[0]._id;
 				item.sets = current[1],
 				item.reps = current[2];
+				item.weight= current[3];
 				savedLog.items.push(item);
 			});
 			// console.log(logItems.total);
@@ -238,12 +238,15 @@ router.post('/history',middleware.isLoggedIn,function(req,res){
 				if(err){
 					console.log(err);
 				} else {
-					console.log(savedUser);
+					console.log('------------------------');
+					console.log(userLog);
+					var logID = userLog.log_id;
 					savedUser.log = '';
 					savedUser.logItems = '';
 					userLog = '';
 					// res.render('order',{User:foundUser});
-					res.send('saved Workout');
+					// res.send('saved Workout');
+					res.render('save-workout',{logID : logID});
 				}
 			});
 		}).catch(function(err){
@@ -321,7 +324,8 @@ router.get('/history/:id',middleware.isLoggedIn,function(req,res){
 							var doc = {
 								exercise : foundDoc,
 								sets : current.sets,
-								reps : current.reps
+								reps : current.reps,
+								weight : current.weight
 							}
 							console.log(doc);
 							resolve(doc);
@@ -331,6 +335,7 @@ router.get('/history/:id',middleware.isLoggedIn,function(req,res){
 			});
 
 			Promise.all(foundLogPromises).then(function(exercises){
+				console.log(exercises);
 				res.render('view-log',{logs:exercises});
 			}).catch(function(err){
 				console.log(err);
