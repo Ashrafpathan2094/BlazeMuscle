@@ -107,7 +107,7 @@ router.post('/log',middleware.isLoggedIn,function(req,res){
 				break;
 			}
 		}
-		console.log(userObject);
+		// console.log(userObject);
 		res.sendStatus(200);
 	}
 	 else if (clearLog === 'true') {
@@ -125,7 +125,7 @@ router.post('/log',middleware.isLoggedIn,function(req,res){
 	}
 	else {
 		var items = req.query.items;
-		console.log(savedLogs);
+		// console.log(savedLogs);
 
 		var logItems = new Promise(function(resolve,reject){
 			Exercise.findOne({Name : items},function(err,item){
@@ -146,12 +146,12 @@ router.post('/log',middleware.isLoggedIn,function(req,res){
 				user.log = [];
 				user.log.push(foundItems);
 				res.sendStatus(200);
-				console.log(user);
+				// console.log(user);
 			} else {
 				if(user.log.length === 0 ){
 					user.log = [];
 					user.log.push(foundItems);
-				console.log(user);
+				// console.log(user);
 				} else {
 					var index = user.log.findIndex(function(element){
 						return element.Name === foundItems.Name;
@@ -161,7 +161,7 @@ router.post('/log',middleware.isLoggedIn,function(req,res){
 						user.log.push(foundItems);
 					}
 				}
-				console.log(user);
+				// console.log(user);
 				res.sendStatus(200);
 			}
 
@@ -174,7 +174,7 @@ router.post('/log',middleware.isLoggedIn,function(req,res){
 
 router.post('/history',middleware.isLoggedIn,function(req,res){
 	var logItems =JSON.parse(req.query.items);
-	// console.log(items);
+	// console.log(logItems);
 
 	var savedUser = savedLogs.find(function(element){
 		return element.user === req.user.username;
@@ -186,19 +186,23 @@ router.post('/history',middleware.isLoggedIn,function(req,res){
 	if(typeof savedUser === 'undefined' || typeof logItems === 'undefined'){
 		req.flash('error','Please Enter items in the log');
 		res.redirect('/workout');
-	} else if(typeof logItems.items === 'undefined'){
+	} else if(typeof logItems === 'undefined'){
 		req.flash('error','Please Enter items in the log');
 		res.redirect('/workout');		
-	} else if( logItems.items.length === 0){
+	} else if( logItems.length === 0){
 		req.flash('error','Please Enter items in the log');
 		res.redirect('/workout');
 	}else {
-		var logItemsPromises = logItems.items.map(function(current){
+		var logItemsPromises = logItems.map(function(current){
 			return new Promise(function(resolve,reject){
+				console.log(current);
 				Exercise.findOne({Name:current.name},function(err,item){
 					if(err){
 						reject(err);
 					}
+					console.log('-----------------');
+					console.log(item);
+					console.log([item,current.set,current.reps,current.weight]);
 					resolve([item,current.set,current.reps,current.weight]);
 				});
 			});
@@ -209,7 +213,7 @@ router.post('/history',middleware.isLoggedIn,function(req,res){
 			var savedLog = {};
 			savedLog.items = [];
 			foundItems.forEach(function(current){
-				console.log(current);
+				// console.log(current);
 				// console.log([current[0]._id,current[1],parseInt(current[1])*parseInt(current[0].Price)]);
 				var item = {};
 				item.exercise_id = current[0]._id;
@@ -224,22 +228,22 @@ router.post('/history',middleware.isLoggedIn,function(req,res){
 			// savedUser.log = savedLog;
 			savedUser.logItems = [];
 			savedUser.logItems = savedLog;
-			console.log(savedUser);
-			console.log();
-			console.log(savedUser.logItems.items);
+			// console.log(savedUser);
+			// console.log();
+			// console.log(savedUser.logItems.items);
 			var userLog = {};
 			userLog.log = savedUser.logItems.items;
 			userLog.log_id = mongoose.mongo.ObjectId();
 			userLog.createdAt = moment().toDate();
-			console.log();
-			console.log();
-			console.log(userLog);
+			// console.log();
+			// console.log();
+			// console.log(userLog);
 			User.findOneAndUpdate({username : savedUser.user},{$push : {logs : userLog} },{new:true},function(err,foundUser){
 				if(err){
 					console.log(err);
 				} else {
-					console.log('------------------------');
-					console.log(userLog);
+					// console.log('------------------------');
+					// console.log(userLog);
 					var logID = userLog.log_id;
 					savedUser.log = '';
 					savedUser.logItems = '';

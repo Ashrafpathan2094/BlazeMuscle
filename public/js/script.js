@@ -109,9 +109,8 @@ function save() {
     if($('#log-list').html() === '<h3>Log is Empty! &nbsp; Select items from workout to add.</h3>'){
         alert('Add workout items to log.');
     } else {
-        var logs = {};
-        logs.items = [];
-        $('#log-list').each(function(element){
+        var logs = [];
+        $('tr.item').each(function(element){
             var name = $(this).find('.exercise-name').text();
             var set = $(this).find('input.set-box').val();
             var reps = $(this).find('input.rep-box').val();
@@ -122,7 +121,7 @@ function save() {
                 reps,
                 weight
             }
-            logs.items.push(item);
+            logs.push(item);
         });
         var redirect = function(url, method) {
             var form = document.createElement('form');
@@ -131,7 +130,7 @@ function save() {
             form.action = url;
             form.submit();
         };
-        
+        // console.log(logs);
         redirect('/history?items='+JSON.stringify(logs), 'post');
     }    
 }
