@@ -165,6 +165,13 @@ function validateQuantity(event){
     
 }
 
-// ------------------------------------------
-// ---------                        ---------
-// ------------------------------------------
+// ------------------------------------------------------
+// -------------      Dashboard      --------------------
+// ------------------------------------------------------
+
+$('#myModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); 
+    var message = button.data('message');
+    var modal = $(this);
+    modal.find('.message').text(message);
+});

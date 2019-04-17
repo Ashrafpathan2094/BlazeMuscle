@@ -5,6 +5,7 @@ const moment = require('moment');
 
 const User = require('../models/user');
 const Exercise = require('../models/exercise');
+const Message = require('../models/message');
 
 const router  = express.Router();
 
@@ -416,8 +417,28 @@ router.post('/change-password',middleware.isLoggedIn,function(req,res){
 
 });
 
-router.get('*',function(req,res){
-	res.send("page not found");
+router.get('/contactus',function(req,res){
+	res.render('contact-us');
+});
+
+router.post('/contactus',function(req,res){
+	var messageObject = {
+		name : req.body.name,
+		phoneNumber : req.body['phone-number'],
+		email : req.body.email,
+		message : req.body.message
+	};
+
+	Message.insertMany(messageObject,function(err,doc){
+		if(err){
+			console.log(err);
+			req.flash('error','An error occured.');
+			res.redirect('/contactus');			
+		} else {
+			req.flash('success','Message Submitted Successfully.');
+			res.redirect('/contactus');			
+		}
+	});
 });
 
 module.exports = router;

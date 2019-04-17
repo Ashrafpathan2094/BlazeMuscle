@@ -7,10 +7,12 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const routes = require('./routes/routes');
+const admin = require('./routes/admin');
 const app = express();
 
 const User = require('./models/user');
 const Exercise = require('./models/exercise');
+const Admin = require("./models/admin");
 
 const seedDB = require('./seed');
 
@@ -27,6 +29,18 @@ mongoose.connect("mongodb://127.0.0.1:27017/gymDB",{ useNewUrlParser:true },func
 				seedDB();
 			}
 		}));
+		Admin.findOne({username:'admin'},function(err,foundDoc){
+			if(!foundDoc){
+				const password = 'admin123';
+				Admin.register({username : 'admin'},password,function(err,user){
+					if(err){
+						console.log(err);
+					} else {
+						console.log('Admin Registered.');
+					}
+				});
+			}
+		});
 	}
 });
 
@@ -43,7 +57,25 @@ app.use(flash());
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use('local',new LocalStrategy(User.authenticate()));
+passport.use('admin-local',new LocalStrategy(Admin.authenticate()));
+
+passport.serializeUser(function(user, done) {	
+	done(null, user.id);
+});
+  
+passport.deserializeUser(function(id, done) {
+	User.findById(id, function(err, user) {
+		if(user) {
+			done(err, user);
+		} else {
+			Admin.findById(id,function(err,admin){
+				done(err,admin);
+			});
+		}
+	});
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -59,6 +91,7 @@ app.use(express.static(__dirname + "/public"));
 app.set('view engine','ejs');
 
 app.use('/',routes);
+app.use('/admin',admin);
 
 app.listen(port,function(err){
 	if(err){
