@@ -175,3 +175,14 @@ $('#myModal').on('show.bs.modal', function (event) {
     var modal = $(this);
     modal.find('.message').text(message);
 });
+
+// ------------------------------------------------------
+// -------------     User Management---------------------
+// ------------------------------------------------------
+
+function validateAction(){
+    var choice = confirm('Do you want to proceed?');
+    if(choice === false){
+        event.preventDefault();
+    }
+}
