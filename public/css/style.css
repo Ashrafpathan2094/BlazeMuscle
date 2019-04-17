@@ -27,6 +27,17 @@ body.main{
     background-attachment: fixed;
 }
 
+.responsive-form {
+  width: 45%;
+  margin: 50px auto;
+}
+
+.responsive-button {
+  font-weight: bold;
+  width: 40%;
+  margin: 10px 23px;
+}
+
 /* ------------------------------------------- */
                 /* Login */
 /* ------------------------------------------- */

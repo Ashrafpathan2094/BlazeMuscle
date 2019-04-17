@@ -349,6 +349,73 @@ router.get('/history/:id',middleware.isLoggedIn,function(req,res){
 	});
 });
 
+router.get('/update-profile',middleware.isLoggedIn,function(req,res){
+	User.findOne({username:req.user.username},function(err,foundUser){
+		if(err){
+			console.log(err);
+		} else {
+			// console.log(foundUser);
+			res.render('update-profile',{User:foundUser});
+		}
+	});
+});
+
+router.post('/update-profile',middleware.isLoggedIn,function(req,res){
+
+	User.findOne({username:req.user.username},function(err,foundUser){
+		if(err){
+			console.log(err);
+		} else {
+			var name = req.body.name || foundUser.name;
+			var username = req.body.email || foundUser.username;
+			var phoneNumber = req.body['phone-number'] || foundUser.phoneNumber; 
+
+			var updatedUser = {
+				name ,
+				phoneNumber ,
+				username
+			}		
+			User.findOneAndUpdate({_id : foundUser._id},updatedUser,{new : true},function(err,modifiedUser){
+				if(err){
+					console.log(err);
+					req.flash('error','Error while updating data');
+					res.redirect('/update-profile');
+				} else {
+					req.flash('success','Data updated successfully');
+					res.redirect('/update-profile');
+				}
+			});
+		}
+	});
+
+});
+
+router.get('/change-password',middleware.isLoggedIn,function(req,res){
+	User.findOne({username:req.user.username},function(err,foundUser){
+		if(err){
+			console.log(err);
+		} else {
+			res.render('change-password',{User:foundUser});
+		}
+	});
+});
+
+router.post('/change-password',middleware.isLoggedIn,function(req,res){
+
+	User.findOne({username:req.user.username},function(err,foundUser){
+		if(err){
+			console.log(err);
+		} else {
+			foundUser.setPassword(req.body['new-password'],function(){
+				foundUser.save();
+				req.flash('success','Data updated successfully');
+				res.redirect('/change-password');
+			});
+		}
+	});
+
+});
+
 router.get('*',function(req,res){
 	res.send("page not found");
 });
