@@ -49,6 +49,10 @@ const userSchema = mongoose.Schema({
         unique:true,
         trim  : true
     } , 
+    isMember : {
+        type : Boolean,
+        required : true
+    },
     logs : [logSchema]
 });
 

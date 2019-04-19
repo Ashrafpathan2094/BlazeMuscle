@@ -37,7 +37,8 @@ router.post('/signup',function(req,res){
 	const newUser = {
 		name : req.body.name,
 		phoneNumber : req.body['phone-number'],
-		username : req.body.email
+		username : req.body.email,
+		isMember : false
 	};
 
 	User.register(newUser , Password , function(err,user){

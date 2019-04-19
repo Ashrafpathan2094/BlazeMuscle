@@ -96,7 +96,8 @@ router.post('/user/:id/modify',function(req,res){
     var updatedUser = {
         name:req.body.name,
         phoneNumber:req.body['phone-number'],
-        username:req.body.email    
+        username:req.body.email,
+        isMember : req.body.status === 'Active' ? true : false
     };
 
     User.findByIdAndUpdate(req.params.id,updatedUser,{new:true},function(err,modifiedUser){
@@ -105,11 +106,13 @@ router.post('/user/:id/modify',function(req,res){
             req.flash('err','An error occured.');
             res.redirect('/admin/user');
         } else {
-            modifiedUser.setPassword(req.body['new-password'],function(){
-                modifiedUser.save();
-                req.flash('success','Data updated successfully');
-                res.redirect('/admin/user');
-            });
+            req.flash('success','Data updated successfully');
+            res.redirect('/admin/user');
+            // modifiedUser.setPassword(req.body['new-password'],function(){
+            //     modifiedUser.save();
+            //     req.flash('success','Data updated successfully');
+            //     res.redirect('/admin/user');
+            // });
         }
     });
 
@@ -144,7 +147,6 @@ router.get('/item/:id/modify',function(req,res){
 
 router.post('/item/:id/modify',function(req,res){
 
-
     var updatedItem = {
         Name : req.body.name,
         Price : req.body.price,
@@ -162,7 +164,7 @@ router.post('/item/:id/modify',function(req,res){
             res.redirect('/admin/item');
         }
     });
-
+    
 });
 
 router.get('/item/new',function(req,res){
