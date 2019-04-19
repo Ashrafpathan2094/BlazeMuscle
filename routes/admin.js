@@ -8,6 +8,7 @@ const router = express.Router();
 const User = require('../models/user');
 const Exercise = require('../models/exercise');
 const Message = require('../models/message');
+const Item = require('../models/item');
 const middleware = require('../middleware/middleware');
 
 router.get('/',function(req,res){
@@ -112,6 +113,80 @@ router.post('/user/:id/modify',function(req,res){
         }
     });
 
+});
+
+router.get('/item',function(req,res){
+    Item.find({},function(err,foundDocs){
+        if(err){
+            console.log(err);
+        } else {
+            res.render('view-item',{Item:foundDocs});
+        }
+    });
+}); 
+
+router.post('/item/:id/delete',function(req,res){
+    Item.findByIdAndDelete(req.params.id,function(){
+        req.flash('success','Item Deleted Successfully');
+        res.redirect('/admin/item');
+    });
+});
+
+router.get('/item/:id/modify',function(req,res){
+    Item.findById(req.params.id,function(err,foundDoc){
+        if(err){
+            console.log(err);
+        } else {
+            res.render('modify-item',{Item:foundDoc});
+        }
+    })
+});
+
+router.post('/item/:id/modify',function(req,res){
+
+
+    var updatedItem = {
+        Name : req.body.name,
+        Price : req.body.price,
+        Category : req.body.category,
+        Units : req.body.units
+    };
+
+    Item.findByIdAndUpdate(req.params.id,updatedItem,{new:true},function(err){
+        if(err){
+            console.log(err);
+            req.flash('err','An error occured.');
+            res.redirect('/admin/item');
+        } else {
+            req.flash('success','Data updated successfully');
+            res.redirect('/admin/item');
+        }
+    });
+
+});
+
+router.get('/item/new',function(req,res){
+    res.render('new-item');
+});
+
+router.post('/item/new',function(req,res){
+    var newItem = {
+        Name : req.body.name,
+        Price : req.body.price,
+        Category : req.body.category,
+        Units : req.body.units
+    };
+
+    Item.insertMany(newItem,function(err,doc){
+        if(err){
+            console.log(err);
+            req.flash('err','An error occured.');
+            res.redirect('/admin/item');
+        } else {
+            req.flash('success','Data Inserted successfully');
+            res.redirect('/admin/item');
+        }
+    });
 });
 
 module.exports = router;

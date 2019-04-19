@@ -1,0 +1,54 @@
+<% include partials/header %>
+
+<% include partials/admin-navigation %>
+
+<div class='admin-main'>
+
+    <% include partials/_messages %>
+
+    <div class="table-responsive">
+
+        <table class='table table-striped table-condensed'>
+        
+            <th> Item ID </th>
+            <th> Name </th>
+            <th> Category </th>
+            <th> Price </th>
+            <th> Units </th>
+            <th> Total </th>
+            <th> Edit </th>
+            <th> Delete </th>
+
+            <% if(Item && Item.length > 0){
+                 Item.forEach(function(current){ %>
+                    <tr>
+                        <td><%= current._id %></td>
+                        <td><%= current.Name%></td>
+                        <td><%= current.Category%></td>
+                        <td><%= current.Price%></td>
+                        <td><%= current.Units%></td>                       
+                        <td>
+                            <%= parseInt(current.Price) * parseInt(current.Units)%>  
+                        </td>
+                        <td>
+                            <form action='/admin/item/<%=current._id%>/modify%>' method='get'>
+                                <button class='icon' onclick='validateAction()'> <i class="fa fa-pencil"></i> </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action='/admin/item/<%=current._id%>/delete%>' method='post'>
+                                <button class='icon' onclick="validateAction()"> <i class="fa fa-trash"></i> </button>
+                            </form>
+                        </td>
+                    </tr>
+
+                <% });
+             } %>
+
+        </table>
+
+    </div>
+
+</div>
+
+<% include partials/footer%>

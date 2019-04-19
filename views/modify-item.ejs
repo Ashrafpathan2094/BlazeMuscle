@@ -1,0 +1,61 @@
+<% include partials/header %>
+
+<% include partials/admin-navigation %>
+
+    <div class='admin-main'>
+
+        <div class = "container">
+            <% include partials/_messages%>
+
+            <form action="/admin/item/<%=Item._id%>/modify" method="post" class="modify-user-form responsive-form">
+                
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Enter New Name" value = "<%= Item.Name%>" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-inr"></i></span>
+                        <input type="text" name="price" id="price" class="form-control input-lg" placeholder="Enter New Price" value = "<%= Item.Price%>" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                        <select id='category' name='category' class="form-control input-lg">
+
+                            <% var categories = ['Cardio Vascular','Free Weight','Resistance'];
+                            categories.forEach(function(current){ %>
+                                <option value= '<%=  current %>' <%= Item.Category === current ? 'selected' : ''%> > <%=  current %> </option>
+                            <% });%>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="units">Units</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
+                        <input type="text" name="units" id="units" class="form-control input-lg" placeholder="Enter Units" value="<%= Item.Units%>" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg modify-button responsive-button">Modify</button>
+                    <button type="reset" class="btn btn-default btn-lg reset-button responsive-button">Reset</button>    
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+<% include partials/footer %>

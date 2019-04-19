@@ -270,3 +270,20 @@ button.btn-lg.btn.empty-log-button {
 .fa.fa-file-text:hover{
   color: #E74C3C;
 }
+
+/* ------------------------------------------------ */
+/* -------------------  ADMIN/ITEM  --------------- */
+/* ------------------------------------------------ */
+
+button.icon {
+  border:none;
+  background: none;
+}
+
+.fa.fa-pencil {
+  color: #212121;
+}
+
+.fa.fa-pencil:hover{
+  color:#3498DB;
+}
