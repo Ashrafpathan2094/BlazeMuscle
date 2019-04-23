@@ -12,17 +12,31 @@ pageInit();
 
 function validateSignUp(){
 
-    const phoneNumber = $('#phone-number');
-    const password = $('#password');
-    const confirmPassword = $('#password_confirmation');
+    var choice = confirm('Do you want to proceed?');
+    if(choice === false){
+        event.preventDefault();        
+    } else {
+        
+        const name = $("#name");        
+        const email = $('#email');
+        const phoneNumber = $('#phone-number');
+        const password = $('#password');
+        const confirmPassword = $('#password_confirmation');
+        
+        if(!/^[a-zA-Z ]*$/.test(name.val())){
+            alert('Enter Name with alphabets only');
+            event.preventDefault();
+        } else if(phoneNumber.val().length !== 10 || !/^[0-9]*$/.test(phoneNumber.val()) ){
+            alert("Enter Phone Number with 10 digits");
+            event.preventDefault();
+        } else if(password.val() !== confirmPassword.val()){
+            alert("Entered Password does not match");
+            event.preventDefault();
+        } else if(!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email.val())){
+            alert('Enter proper email address');
+            event.preventDefault();
+        }
 
-    if(phoneNumber.val().length !== 10 ){
-        alert("Enter Phone Number with 10 digits");
-        event.preventDefault();
-    }
-    if(password.val() !== confirmPassword.val()){
-        alert("Entered Password does not match");
-        event.preventDefault();
     }
 
 }
@@ -130,7 +144,6 @@ function save() {
             form.action = url;
             form.submit();
         };
-        // console.log(logs);
         redirect('/history?items='+JSON.stringify(logs), 'post');
     }    
 }
@@ -184,5 +197,77 @@ function validateAction(){
     var choice = confirm('Do you want to proceed?');
     if(choice === false){
         event.preventDefault();
+    }
+}
+
+function validateContactUs(){
+
+    var choice = confirm('Do you want to proceed?');
+    if(choice === false){
+        event.preventDefault();        
+    } else {
+        
+        const name = $('#name');
+        const phoneNumber = $('#phone-number');
+        const message =$("#message");
+        const email = $('#email');
+        if(!/^[a-zA-Z ]*$/.test(name.val())){
+            alert('Enter Name with alphabets only');
+            event.preventDefault();
+        } else if( phoneNumber.val().length !== 10 || !/^[0-9]*$/.test(phoneNumber.val()) ){
+            alert("Enter Phone Number with 10 digits");
+            event.preventDefault();
+        } else if( message.val().length === 0 ){
+            alert("Message is Empty.Enter a Message.");
+            event.preventDefault();
+        } else if(message.val().length > 100) {
+            alert("Message should be upto 100 characters only");
+            event.preventDefault();
+        } else if(!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email.val())){
+            alert('Enter proper email address');
+            event.preventDefault();
+        }
+
+    }
+
+}
+
+function validateUpdate(){
+
+    var choice = confirm('Do you want to proceed?');
+    if(choice === false){
+        event.preventDefault();        
+    } else{
+        
+        const email = $('#email');
+        const name = $('#name');
+        const phoneNumber = $('#phone-number');
+        
+        if(!/^[a-zA-Z ]*$/.test(name.val())){
+            alert('Enter Name with alphabets only');
+            event.preventDefault();
+        } else if(phoneNumber.val().length != 10  || !/^[0-9]*$/.test(phoneNumber.val()) ){
+            alert("Enter Phone Number with 10 digits");
+            event.preventDefault();
+        } else if(!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email.val())){
+            alert('Enter proper email address');
+            event.preventDefault();
+        }   
+    }
+}
+
+function validateChangePassword() {
+    var choice = confirm('Do you want to proceed?');
+    if(choice === false){
+        event.preventDefault();        
+    } else{
+
+        const password = $('#new-password');
+        const confirmPassword = $('#confirm-password');
+        if(password.val() !== confirmPassword.val()){
+            alert("Entered Password does not match");
+            event.preventDefault();
+        }
+        
     }
 }

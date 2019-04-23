@@ -11,7 +11,7 @@ const Message = require('../models/message');
 const Item = require('../models/item');
 const middleware = require('../middleware/middleware');
 
-router.get('/',function(req,res){
+router.get('/',middleware.isAdminLoggedIn,function(req,res){
     User.find({},function(err,foundUsers){
         if(err){
             console.log(err);
@@ -34,21 +34,27 @@ router.get('/login',function(req,res){
 router.post('/login',
     passport.authenticate('admin-local',{
         successRedirect : '/admin',
-        failureRedirect : "/login",
+        failureRedirect : "/admin/login",
         failureFlash : true
     }
 ));
 
-router.get('/user/new',function(req,res){
+router.get('/logout', function(req, res){
+	req.logout();
+	res.redirect('/admin/login');
+});
+
+router.get('/user/new',middleware.isAdminLoggedIn,function(req,res){
     res.render('new-user');
 });
 
-router.post('/user/new',function(req,res){
+router.post('/user/new',middleware.isAdminLoggedIn,function(req,res){
     const Password = req.body.password;
 	const newUser = {
 		name : req.body.name,
 		phoneNumber : req.body['phone-number'],
-		username : req.body.email
+        username : req.body.email,
+        isMember : false
 	};
 
 	User.register(newUser , Password , function(err,user){
@@ -64,7 +70,7 @@ router.post('/user/new',function(req,res){
 	});
 });
 
-router.get('/user',function(req,res){
+router.get('/user',middleware.isAdminLoggedIn,function(req,res){
     User.find({},function(err,foundDocs){
         if(err){
             console.log(err);
@@ -74,14 +80,14 @@ router.get('/user',function(req,res){
     });
 });
 
-router.post('/user/:id/delete',function(req,res){
+router.post('/user/:id/delete',middleware.isAdminLoggedIn,function(req,res){
     User.findByIdAndDelete(req.params.id,function(){
         req.flash('success','User Deleted Successfully');
         res.redirect('/admin/user');
     });
 });
 
-router.get('/user/:id/modify',function(req,res){
+router.get('/user/:id/modify',middleware.isAdminLoggedIn,function(req,res){
     User.findById(req.params.id,null,{orders:0},function(err,foundDoc){
         if(err){
             console.log(err);
@@ -91,7 +97,7 @@ router.get('/user/:id/modify',function(req,res){
     })
 });
 
-router.post('/user/:id/modify',function(req,res){
+router.post('/user/:id/modify',middleware.isAdminLoggedIn,function(req,res){
 
     var updatedUser = {
         name:req.body.name,
@@ -118,7 +124,7 @@ router.post('/user/:id/modify',function(req,res){
 
 });
 
-router.get('/item',function(req,res){
+router.get('/item',middleware.isAdminLoggedIn,function(req,res){
     Item.find({},function(err,foundDocs){
         if(err){
             console.log(err);
@@ -128,14 +134,14 @@ router.get('/item',function(req,res){
     });
 }); 
 
-router.post('/item/:id/delete',function(req,res){
+router.post('/item/:id/delete',middleware.isAdminLoggedIn,function(req,res){
     Item.findByIdAndDelete(req.params.id,function(){
         req.flash('success','Item Deleted Successfully');
         res.redirect('/admin/item');
     });
 });
 
-router.get('/item/:id/modify',function(req,res){
+router.get('/item/:id/modify',middleware.isAdminLoggedIn,function(req,res){
     Item.findById(req.params.id,function(err,foundDoc){
         if(err){
             console.log(err);
@@ -145,7 +151,7 @@ router.get('/item/:id/modify',function(req,res){
     })
 });
 
-router.post('/item/:id/modify',function(req,res){
+router.post('/item/:id/modify',middleware.isAdminLoggedIn,function(req,res){
 
     var updatedItem = {
         Name : req.body.name,
@@ -167,7 +173,7 @@ router.post('/item/:id/modify',function(req,res){
     
 });
 
-router.get('/item/new',function(req,res){
+router.get('/item/new',middleware.isAdminLoggedIn,function(req,res){
     res.render('new-item');
 });
 

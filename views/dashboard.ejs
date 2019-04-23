@@ -1,56 +1,58 @@
 <% include partials/header %>
-
-<%include partials/admin-navigation.ejs%>
+<div class="hold-transition skin-purple sidebar-mini">
+    <% include partials/admin-header%>
+    <div class="wrapper">
+    <%include partials/admin-sidebar%>
+        <div class="content-wrapper">
+                <section class="content container-fluid">
 
 <div class="container-fluid">
     <div class="row">
 
         <div class="row">
-          <div class="col-xs-6 col-md-3">
-
-                <div class="circle-tile dark-blue">
-                    <a href="#"><div class="circle-tile-heading"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
-                    <div class="circle-tile-content">
-                    <div class="circle-tile-description text-faded"> Users</div>
-                    <div class="circle-tile-number text-faded "><%= stats.user%></div>
-                    </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
+    
+                <div class="info-box-content">
+                    <span class="info-box-text">Users</span> 
+                    <span class="info-box-number"><%= stats.user%></span>
                 </div>
-
-          </div>
-          <div class="col-xs-6 col-md-3">
-
-            <div class="circle-tile red">
-                <a href="#"><div class="circle-tile-heading"><i class="fa fa-shopping-cart fa-fw fa-3x"></i></div></a>
-                <div class="circle-tile-content">
-                <div class="circle-tile-description text-faded"> Orders</div>
-                <div class="circle-tile-number text-faded "><%= stats.order%></div>
                 </div>
             </div>
-
-          </div>
-          <div class="col-xs-6 col-md-3">
-
-            <div class="circle-tile purple">
-                <a href="#"><div class="circle-tile-heading"><i class="fa fa-inr fa-fw fa-3x"></i></div></a>
-                <div class="circle-tile-content">
-                <div class="circle-tile-description text-faded"> Sales</div>
-                <div class="circle-tile-number text-faded "><%= stats.sales%> &#8360 </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-shopping-cart"></i></span>
+    
+                <div class="info-box-content">
+                    <span class="info-box-text">Orders</span>
+                    <span class="info-box-number"><%= stats.order%></span>
+                </div>
                 </div>
             </div>
-
-          </div>
-
-          <div class="col-xs-6 col-md-3">
-  
-            <div class="circle-tile blue">
-                <a href="#"><div class="circle-tile-heading"><i class="fa fa-comment fa-fw fa-3x"></i></div></a>
-                <div class="circle-tile-content">
-                <div class="circle-tile-description text-faded"> Messages</div>
-                <div class="circle-tile-number text-faded "><%= messages.length%></div>
+    
+            <div class="clearfix visible-sm-block"></div>
+    
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-inr"></i></span>
+    
+                <div class="info-box-content">
+                    <span class="info-box-text">Sales</span>
+                    <span class="info-box-number"><%= stats.sales%></span> 
+                </div>
                 </div>
             </div>
-
-          </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fa fa-comment "></i></span>
+    
+                <div class="info-box-content">
+                    <span class="info-box-text">Messages</span>
+                    <span class="info-box-number"><%= messages.length%></span>
+                </div>
+                </div>
+            </div>
         </div>
 
         <br>
@@ -107,4 +109,8 @@
     </div>
   </div>
 
-<% include partials/footer %>
+</section>
+</div>
+</div>
+</div>
+<% include partials/footer%>

@@ -55,8 +55,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash());
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 passport.use('local',new LocalStrategy(User.authenticate()));
 passport.use('admin-local',new LocalStrategy(Admin.authenticate()));
 
