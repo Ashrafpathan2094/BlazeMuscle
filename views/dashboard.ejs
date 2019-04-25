@@ -22,11 +22,11 @@
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa fa-shopping-cart"></i></span>
+                <span class="info-box-icon bg-red"><i class="fa fa-user"></i></span>
     
                 <div class="info-box-content">
-                    <span class="info-box-text">Orders</span>
-                    <span class="info-box-number"><%= stats.order%></span>
+                    <span class="info-box-text">Active Members</span>
+                    <span class="info-box-number"><%= stats.member%></span>
                 </div>
                 </div>
             </div>
@@ -35,11 +35,11 @@
     
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa fa-inr"></i></span>
+                <span class="info-box-icon bg-green"><i class="fa fa-bars"></i></span>
     
                 <div class="info-box-content">
-                    <span class="info-box-text">Sales</span>
-                    <span class="info-box-number"><%= stats.sales%></span> 
+                    <span class="info-box-text">Logs</span>
+                    <span class="info-box-number"><%= stats.log%></span> 
                 </div>
                 </div>
             </div>
@@ -59,6 +59,8 @@
 
         <div class="row">
             <div class="col-xs-12">
+
+              <% include partials/_messages%>
                 
                 <div class="table-responsive">
     
@@ -70,6 +72,7 @@
                       <th> Email </th>
                       <th> Phone Number </th>  
                       <th> View Message </th>
+                      <th> Delete Message </th>
                     </tr>
 
                     <% messages.forEach(function(current){ %>
@@ -79,6 +82,7 @@
                       <td> <%= current.email%> </td>
                       <td> <%= current.phoneNumber%> </td>
                       <td> <button type="button" class="icon" data-toggle="modal" data-target="#myModal" data-message="<%=current.message%>"> <i class="fa fa-file-text"></i> </button> </td>
+                      <td> <form action="/admin/message/<%=current._id%>/delete" method="post"><button class="icon"> <i class="fa fa-trash"></i> </button></form> </td>                      
                     </tr>
                     <% });%>
 

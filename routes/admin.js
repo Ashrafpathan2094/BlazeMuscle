@@ -1,12 +1,9 @@
 const express = require('express');
-const path = require('path');
-const moment = require('moment');
 const passport = require('passport');
 
 const router = express.Router();
 
 const User = require('../models/user');
-const Exercise = require('../models/exercise');
 const Message = require('../models/message');
 const Item = require('../models/item');
 const middleware = require('../middleware/middleware');
@@ -17,13 +14,30 @@ router.get('/',middleware.isAdminLoggedIn,function(req,res){
             console.log(err);
         } else {
             var userCount = foundUsers.length;
+            var memberCount = 0;
+            var logCount = 0;
+            foundUsers.forEach(function(user){
+                if(user.isMember){
+                    memberCount++;
+                }
+                logCount += parseInt(user.logs.length);
+            });
             var statsObject = {
-                user : userCount
+                user : userCount,
+                member : memberCount,
+                log : logCount
             };
             Message.find({},function(err,docs){
                 res.render('dashboard',{stats : statsObject,messages : docs});
             });
         }
+    });
+});
+
+router.post('/message/:id/delete',middleware.isAdminLoggedIn,function(req,res){
+    Message.findByIdAndDelete(req.params.id,function(){
+        req.flash('success','Message Deleted Successfully');
+        res.redirect('/admin');
     });
 });
 
